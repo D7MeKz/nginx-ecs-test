@@ -1,0 +1,36 @@
+{
+    "containerDefinitions": [
+      {
+        "name": "nginx",
+        "image": "883505381142.dkr.ecr.ap-northeast-2.amazonaws.com/fastcampus:latest",
+        "portMappings": [
+          {
+            "containerPort": 80,
+            "protocol": "tcp"
+          }
+        ],
+        "essential": true,
+        "dockerLabels": {
+          "name": "nginx-sample"
+        },
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/nginx-sample",
+            "awslogs-region": "ap-northeast-2",
+            "awslogs-create-group": "true",
+            "awslogs-stream-prefix": "nginx-sample"
+          }
+        }
+      }
+    ],
+    "taskRoleArn": "arn:aws:iam::883505381142:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::883505381142:role/ecsTaskExecutionRole",
+    "family": "nginx-sample",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+      "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "1024"
+  }
